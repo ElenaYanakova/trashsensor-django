@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="content">
+        <h1>Сенсор мусора</h1>
+        <form action="/" method="POST">
+            {% csrf_token %}
+            <div class="input-group">
+                <span class="input-group-addon">id датчика</span>
+                <input type="number" name="channel_id" class="form-control"
+                       aria-label="Id for channel on thingspeak.com"
+                       id="input-channel-id"
+                       value="213466">
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">Объем</span>
+                        <input type="number" name="volume" class="form-control" aria-label="Text input with checkbox"
+                               id="input-volume"
+                               min="0">
+                        <span class="input-group-addon">%</span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">Температура</span>
+                        <input type="number" name="temperature" class="form-control"
+                               aria-label="Text input with radio button"
+                               id="input-temperature">
+                        <span class="input-group-addon">C</span>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="input-group text-center">
+                <input type="submit" class="btn btn-primary" value="Отправить"/>
+            </div>
+        </form>
+        <a id="a-thingspeak-channel" href="https://thingspeak.com/channels/213466" target="_blank">
+            Посмотреть данные с сенсора на thingspeak.com
+        </a>
+    </div>
+    <script>
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+
+        var THING_SPEAK = "https://thingspeak.com/channels/";
+
+        $(function () {
+            var aThingSpeakChannel = $("#a-thingspeak-channel");
+            var inputChannelId = $("#input-channel-id");
+            var inputVolume = $("#input-volume");
+            var inputTemp = $("#input-temperature");
+
+            inputChannelId.on('input', function () {
+                aThingSpeakChannel.attr("href", THING_SPEAK + inputChannelId.val());
+            });
+            inputVolume.val(getRandomInt(0, 100));
+            inputTemp.val(getRandomInt(-40, 40));
+        })
+    </script>
+{% endblock content %}

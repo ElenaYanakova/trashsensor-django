@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Сенсор мусора</title>
+    <link rel="stylesheet" href="{% static "css/vendor/bootstrap.min.css" %}" type="text/css">
+    <link rel="stylesheet" href="{% static "css/main.css" %}" type="text/css">
+</head>
+<body>
+<script src="{% static "js/jquery-1.11.3.js" %}"></script>
+{% block content %}
+{% endblock content %}
+
+<!-- Bootstrap Core JavaScript -->
+{#<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>#}
+</body>
+</html>
