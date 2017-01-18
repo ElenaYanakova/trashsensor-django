@@ -17,6 +17,6 @@ from django.conf.urls import url
 
 from frontend.views import home
 
-urlpatterns = {
+urlpatterns = [
     url(r'^$', home),
-}
+]
