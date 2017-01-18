@@ -78,7 +78,7 @@ DATABASES = {
         'NAME': 'tunemate_trash10',  # Or path to database file if using sqlite3.
         'USER': 'tunemate_trash10',  # Not used with sqlite3.
         'PASSWORD': 'WEmZcf9Rgw',  # Not used with sqlite3.
-        'HOST': 'mmysql7.locum.ru',  # Set to empty string for localhost. Not used with sqlite3.
+        'HOST': 'mysql7.locum.ru',  # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',  # Set to empty string for default. Not used with sqlite3.
     }
 }
