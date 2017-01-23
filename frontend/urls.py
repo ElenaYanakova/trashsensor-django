@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 
-from frontend.views import home
+from frontend.views import home, sensor_page
 
 urlpatterns = [
-    url(r'^$', home),
+    url(r'^sensor/(?P<pk>\d+)/$', sensor_page, name='sensor_page'),
+    url(r'^$', home, name='home'),
 ]

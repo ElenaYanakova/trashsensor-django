@@ -1,4 +1,64 @@
+body {
+    background: url(../img/sayagata-400px.png) repeat;
+}
+
 .content {
     width: 600px;
     margin: 20px auto;
+}
+
+.toolbar {
+    height: 48px;
+    /*background: lime;*/
+    font-size: 28px;
+    line-height: 48px;
+    margin-bottom: 16px;
+}
+
+.toolbar>* {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.toolbar .home-btn {
+    height: 32px;
+    width: 32px;
+    margin: 8px;
+    display: inline-block;
+    background-image: url(../img/ic_arrow_back_black_24px.svg);
+    background-size: 32px 32px;
+}
+
+.toolbar .title {
+    margin-left: 8px;
+}
+
+.card {
+    border-radius: 8px;
+    background: white;
+    padding: 16px;
+    box-shadow: rgba(160, 160, 160, 0.04) 0px 2px 8px 4px;
+    -webkit-transition: all .35s;
+    -moz-transition: all .35s;
+    transition: all .35s;
+}
+
+.card:hover {
+    box-shadow: rgba(160, 160, 160, 0.08) 0px 4px 12px 6px;
+}
+
+.page-center {
+    height: 400px;
+    width: 400px;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -200px;
+    margin-left: -200px;
+    text-align: center;
+}
+
+.homer-404 {
+    margin-bottom: 16px;
 }

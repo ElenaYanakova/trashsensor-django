@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="page-center">
+        <img class="homer-404" src="{% static 'img/homer-404.png' %}"/>
+        <h1>404 error</h1>
+        <div>Запрашиваемая страница не существует</div>
+    </div>
+{% endblock %}
