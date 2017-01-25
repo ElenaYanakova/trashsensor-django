@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import datetime
 from django.db import models
 
 
@@ -35,6 +36,7 @@ class Sensor(models.Model):
         sensor.elevation = json['elevation']
         sensor.last_entry_id = json['last_entry_id']
         sensor.ranking = json['ranking']
+        sensor.datetime_create = datetime.datetime.now()
         for api_key in json['api_keys']:
             if api_key['write_flag']:
                 sensor.write_key = api_key['api_key']

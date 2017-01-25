@@ -11,8 +11,7 @@ def make_request(url, method='get', params={}, key_required=False):
     method = method.lower()
     if key_required:
         params['api_key'] = API_KEY
-    r = requests.request(method, full_url, params=params)
-    return r
+    return requests.request(method, full_url, params=params)
 
 
 def create_channel(sensor):
