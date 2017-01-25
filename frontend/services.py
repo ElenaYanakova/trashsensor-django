@@ -3,7 +3,7 @@ import requests
 from frontend.models import Sensor
 
 BASE_URL = 'https://api.thingspeak.com/%s'
-API_KEY = 'D6OIEIT5E9EZ3WJU'
+API_KEY = '3BLVIV5M1A3COYBF'
 
 
 def make_request(url, method='get', params={}, key_required=False):
@@ -15,17 +15,21 @@ def make_request(url, method='get', params={}, key_required=False):
     return r
 
 
-def create_channel(name=None, description=None, elevation=None, latitude=None, longitude=None):
+def create_channel(sensor):
     method = 'POST'
-    url = 'channels'
+    url = 'channels.json'
     params = {
-        'name': name,
-        'description': description,
-        'elevation': elevation,
-        'latitude': latitude,
-        'longitude': longitude,
+        'name': sensor.name,
+        'description': sensor.description,
+        'elevation': sensor.elevation,
+        'latitude': sensor.latitude,
+        'longitude': sensor.longitude,
+        'field1': 'Volume',
+        'field2': 'Temperature',
+        'field3': 'Firmware',
+        'public_flag': 'true',
     }
-    r = make_request(url, method, params, key_required=True)
+    return make_request(url, method, params, key_required=True)
 
 
 def view_channel(id):
@@ -40,3 +44,9 @@ def view_channel(id):
     else:
         sensor = sensors[0]
     return sensor
+
+
+def list_my_channels():
+    method = 'GET'
+    url = 'channels.json'
+    return make_request(url, method, key_required=True).json()

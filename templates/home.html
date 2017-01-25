@@ -2,13 +2,23 @@
 {% block content %}
     <div class="content">
         <div class="sensors-wrap">
-            <h2>В базе данных сенсоров: <span class="badge badge-success">{{ sensors | length }}</span></h2>
+        <h2>Сенсоры уровня мусора</h2>
+            <h4>В базе данных сенсоров: <span class="badge badge-success">{{ sensors | length }}</span>
+                <a href="{% url 'sync' %}" class="sync-sensors" title="Синхронизировать с thingspeak"></a>
+            </h4>
+        {% if sync_complete %}
+            <div class="alert alert-success">
+                Данные синхронизированы с thingspeak
+            </div>
+        {% endif %}
             {% for sensor in sensors %}
                 <a class="sensor-item card" href="{% url 'sensor_page' sensor.sensor_id %}">
-                    <div>id: {{ sensor.sensor_id }}</div>
-                    <div>name: {{ sensor.name }}</div>
+                    <div>Имя: {{ sensor.name }}</div>
+                    <div>{{ sensor.sensor_id }}</div>
                 </a>
             {% endfor %}
+            <br/>
+            <a class="btn btn-primary btn-block" href="{% url 'add_sensor' %}">Добавить сенсор</a>
         </div>
     </div>
 {% endblock content %}

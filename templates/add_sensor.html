@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="content">
+        <div class="toolbar">
+            <a class="home-btn" href="{% url 'home' %}">
+            </a>
+            <div class="title">
+                Добавить сенсор
+            </div>
+        </div>
+        {% if not can_create %}
+            <div class="alert alert-danger">
+                К сожалению сенсоры запрещено создавать слишком часто.
+                Подождите {{ wait_time }} часов или обратитесь
+                к администратору
+            </div>
+        {% else %}
+            {% if user.is_superuser %}
+                <div class="alert alert-success">
+                    Уважаемый, {{ user }}!
+                    Вам, как адмиринистратору, разрешено создавать сенсоры без ожидания
+                </div>
+            {% endif %}
+            <div class="card">
+                <form action="{% url 'add_sensor' %}" method="POST">
+                    {% csrf_token %}
+                    {{ form }}
+                    <p/>
+                    <div class="input-group text-center">
+                        <input type="submit" class="btn btn-primary btn-block" value="Добавить"/>
+                    </div>
+                </form>
+                {% if result_ok %}
+                    <div class="alert alert-success">
+                        {{ result }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+
+    </div>
+{% endblock %}

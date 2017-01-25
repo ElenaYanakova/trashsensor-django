@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url
 
-from frontend.views import home, sensor_page
+from frontend.views import home, sensor_page, add_sensor, sync
 
 urlpatterns = [
+    url(r'^sensor/add/$', add_sensor, name='add_sensor'),
+    url(r'^sensor/sync/$', sync, name='sync'),
     url(r'^sensor/(?P<pk>\d+)/$', sensor_page, name='sensor_page'),
     url(r'^$', home, name='home'),
 ]

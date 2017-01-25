@@ -9,8 +9,13 @@
                 Сенсор '{{ sensor.name }}'
             </div>
         </div>
+        {% if data_sent %}
+            <div class="alert alert-success">
+                Данные с сенсора успешно отправлены!
+            </div>
+        {% endif %}
         <div class=" card">
-            <form action="/" method="POST">
+            <form action="#" method="POST">
                 {% csrf_token %}
                 <div class="input-group">
                     <span class="input-group-addon">id датчика</span>
@@ -42,13 +47,13 @@
                     </div>
                 </div>
                 <br/>
-                <a id="a-thingspeak-channel" href="https://thingspeak.com/channels/213466" target="_blank">
+                <a id="a-thingspeak-channel" href="https://thingspeak.com/channels/{{ sensor.sensor_id }}" target="_blank">
                     Посмотреть данные с сенсора на thingspeak.com
                 </a>
                 <br/>
                 <br/>
                 <div class="input-group text-center">
-                    <input type="submit" class="btn btn-primary" value="Отправить"/>
+                    <input type="submit" class="btn btn-primary btn-block" value="Отправить"/>
                 </div>
             </form>
         </div>
@@ -58,17 +63,10 @@
             return Math.floor(Math.random() * (max - min)) + min;
         }
 
-        var THING_SPEAK = "https://thingspeak.com/channels/";
-
         $(function () {
-            var aThingSpeakChannel = $("#a-thingspeak-channel");
-            var inputChannelId = $("#input-channel-id");
             var inputVolume = $("#input-volume");
             var inputTemp = $("#input-temperature");
 
-            inputChannelId.on('input', function () {
-                aThingSpeakChannel.attr("href", THING_SPEAK + inputChannelId.val());
-            });
             inputVolume.val(getRandomInt(0, 100));
             inputTemp.val(getRandomInt(-40, 40));
         })

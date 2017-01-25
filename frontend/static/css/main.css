@@ -2,7 +2,8 @@ body {
     background: url(../img/sayagata-400px.png) repeat;
 }
 
-.content {
+.content,
+footer {
     width: 600px;
     margin: 20px auto;
 }
@@ -41,6 +42,7 @@ body {
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
     transition: all .35s;
+    margin-bottom: 16px;
 }
 
 .card:hover {
@@ -61,4 +63,30 @@ body {
 
 .homer-404 {
     margin-bottom: 16px;
+}
+
+.btn-add-sensor {
+    /*width: 100%;*/
+}
+
+.sync-sensors {
+    vertical-align: top;
+    background-image: url(../img/ic_sync.svg);
+
+    height: 28px;
+    margin-left: 8px;
+    width: 28px;
+    display: inline-block;
+    background-size: 28px 28px;
+    cursor: pointer;
+}
+
+.sync-sensors:hover {
+    opacity: .6;
+}
+
+footer {
+    text-align: center;
+    padding-top: 16px;
+    font-size: 0.8em;
 }
