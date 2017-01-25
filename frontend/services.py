@@ -14,15 +14,15 @@ def make_request(url, method='get', params={}, key_required=False):
     return requests.request(method, full_url, params=params)
 
 
-def create_channel(sensor):
+def create_channel(clean):
     method = 'POST'
     url = 'channels.json'
     params = {
-        'name': sensor.name,
-        'description': sensor.description,
-        'elevation': sensor.elevation,
-        'latitude': sensor.latitude,
-        'longitude': sensor.longitude,
+        'name': clean['name'],
+        'description': clean['description'],
+        'elevation': clean['elevation'],
+        'latitude': clean['latitude'],
+        'longitude': clean['longitude'],
         'field1': 'Volume',
         'field2': 'Temperature',
         'field3': 'Firmware',

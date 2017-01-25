@@ -67,13 +67,7 @@ def add_sensor(request):
         if request.method == 'POST':
             form = SensorForm(request.POST)
             if form.is_valid():
-                clean = form.cleaned_data
-                sensor = Sensor.objects.create(latitude=clean['latitude'],
-                                               elevation=clean['elevation'],
-                                               name=clean['name'],
-                                               longitude=clean['longitude'],
-                                               description=clean['description'])
-                r = create_channel(sensor)
+                r = create_channel(form.cleaned_data)
                 sensor = Sensor.create(r.json())
                 sensor.save()
                 return redirect('sensor_page', sensor.pk)
