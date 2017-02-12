@@ -1,6 +1,16 @@
 import paho.mqtt.client as paho
 
 BROKER_ADDRESS = "mqtt.thingspeak.com"
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+#API_KEY = "D6OIEIT5E9EZ3WJU"
+API_KEY = "3BCODF500EQOVRPN"
+>>>>>>> Stashed changes
+=======
+#API_KEY = "D6OIEIT5E9EZ3WJU"
+API_KEY = "3BCODF500EQOVRPN"
+>>>>>>> Stashed changes
 
 
 def on_connect(client, userdata, flags, rc):

@@ -6,6 +6,9 @@
 *.iml
 out
 gen
+*.pyc
+*.db
+frontend/migrations
 # Created by .ignore support plugin (hsz.mobi)
 
 trashsensor/local_settings.py
