@@ -3,17 +3,8 @@ import requests
 from frontend.models import Sensor
 
 BASE_URL = 'https://api.thingspeak.com/%s'
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-API_KEY = '3BLVIV5M1A3COYBF'
-=======
 #API_KEY = 'D6OIEIT5E9EZ3WJU'
 API_KEY = '3BCODF500EQOVRPN'
->>>>>>> Stashed changes
-=======
-#API_KEY = 'D6OIEIT5E9EZ3WJU'
-API_KEY = '3BCODF500EQOVRPN'
->>>>>>> Stashed changes
 
 
 def make_request(url, method='get', params={}, key_required=False):
