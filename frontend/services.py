@@ -1,16 +1,15 @@
 import requests
 
-from frontend.models import Sensor
+from frontend.models import Sensor, Config
 
 BASE_URL = 'https://api.thingspeak.com/%s'
-API_KEY = '3BLVIV5M1A3COYBF'
 
 
 def make_request(url, method='get', params={}, key_required=False):
     full_url = BASE_URL % url
     method = method.lower()
     if key_required:
-        params['api_key'] = API_KEY
+        params['api_key'] = Config.get_solo().api_key  # 3BLVIV5M1A3COYBF
     return requests.request(method, full_url, params=params)
 
 

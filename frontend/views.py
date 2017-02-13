@@ -52,6 +52,11 @@ def sec_to_hours(sec):
 
 def sync(request):
     my_channels = list_my_channels()
+    if not isinstance(my_channels, list) and my_channels['error']:
+        return render(request, "sync.html", {
+            'error': my_channels['error']['message'],
+            'error_details': my_channels['error']['details'],
+        })
     Sensor.objects.all().delete()
     for channel in my_channels:
         sensor = Sensor.create(channel)
