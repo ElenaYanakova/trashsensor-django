@@ -49,3 +49,9 @@ def list_my_channels():
     method = 'GET'
     url = 'channels.json'
     return make_request(url, method, key_required=True).json()
+
+
+def delete_channel(id):
+    method = 'DELETE'
+    url = 'channels/%s.json' % id
+    return make_request(url, method, key_required=True).json()

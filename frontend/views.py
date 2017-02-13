@@ -24,6 +24,14 @@ def home(request):
     })
 
 
+def sensor_delete(request, pk):
+    if request.user.is_superuser:
+        sensor = get_object_or_404(Sensor, pk=pk)
+        delete_channel(pk)
+        sensor.delete()
+    return redirect('home')
+
+
 def sensor_page(request, pk):
     sensor = get_object_or_404(Sensor, pk=pk)
     data_sent = False
