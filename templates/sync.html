@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="alert alert-danger">
-        <h2>{{ error }}</h2>
-        {{ error_details }}
+        {% if error %}
+            <h2>{{ error.message }}</h2>
+            {{ error.details }}
+        {% else %}
+            {{ my_error }}
+        {% endif %}
     </div>
 {% endblock %}

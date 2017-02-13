@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 import datetime
+
 from django.shortcuts import render, get_object_or_404, render_to_response, redirect
 from django.template import RequestContext
 
 from frontend.forms import SensorForm
-from services import *
+from thingspeak.services import *
 
 # Create your views here.
 from frontend.mqtt import mqttwork
@@ -27,9 +28,17 @@ def home(request):
 def sensor_delete(request, pk):
     if request.user.is_superuser:
         sensor = get_object_or_404(Sensor, pk=pk)
-        delete_channel(pk)
-        sensor.delete()
-    return redirect('home')
+        response = delete_channel(pk)
+        if response['result'] == 'error':
+            return render(request, "sync.html", {
+                'error': response['error'],
+            })
+        else:
+            sensor.delete()
+            return redirect('home')
+    return render(request, "sync.html", {
+        'my_error': u'Удалять сенсоры могут только администраторы'
+    })
 
 
 def sensor_page(request, pk):
@@ -51,12 +60,12 @@ def sec_to_hours(sec):
 
 
 def sync(request):
-    my_channels = list_my_channels()
-    if not isinstance(my_channels, list) and my_channels['error']:
+    result = list_my_channels()
+    if result['result'] == 'error':
         return render(request, "sync.html", {
-            'error': my_channels['error']['message'],
-            'error_details': my_channels['error']['details'],
+            'error': result['error'],
         })
+    my_channels = result['body']
     Sensor.objects.all().delete()
     for channel in my_channels:
         sensor = Sensor.create(channel)
@@ -76,14 +85,18 @@ def add_sensor(request):
     result = None
     result_ok = False
     form = None
+    error = None
     if can_create:
         if request.method == 'POST':
             form = SensorForm(request.POST)
             if form.is_valid():
                 r = create_channel(form.cleaned_data)
-                sensor = Sensor.create(r.json())
-                sensor.save()
-                return redirect('sensor_page', sensor.pk)
+                if r['result'] == 'error':
+                    error = r['error']
+                else:
+                    sensor = Sensor.create(r['body'])
+                    sensor.save()
+                    return redirect('sensor_page', sensor.pk)
         else:
             form = SensorForm()
     return render(request, "add_sensor.html", {
@@ -92,4 +105,5 @@ def add_sensor(request):
         'result_ok': result_ok,
         'can_create': can_create,
         'wait_time': "%.2f" % wait_time,
+        'error': error
     })
