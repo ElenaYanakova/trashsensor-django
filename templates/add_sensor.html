@@ -37,6 +37,12 @@
                     </div>
                 {% endif %}
             </div>
+            {% if error %}
+                <div class="alert alert-danger">
+                    <h2>{{ error.message }}</h2>
+                    {{ error.details }}
+                </div>
+            {% endif %}
         {% endif %}
 
     </div>

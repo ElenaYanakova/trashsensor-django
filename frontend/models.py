@@ -2,7 +2,14 @@
 from __future__ import unicode_literals
 
 import datetime
+
 from django.db import models
+from solo.models import SingletonModel
+
+
+class Config(SingletonModel):
+    api_key = models.CharField(u'API key', max_length=128,
+                               help_text=u'Api KEY на thingspeak.com (по умолчанию: 3BLVIV5M1A3COYBF)')
 
 
 class Sensor(models.Model):
