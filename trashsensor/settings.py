@@ -39,6 +39,7 @@ INSTALLED_APPS = [
 
     'frontend',
     'requests',
+    'solo',
 ]
 
 MIDDLEWARE = [

@@ -47,13 +47,25 @@
                     </div>
                 </div>
                 <br/>
-                <a id="a-thingspeak-channel" href="https://thingspeak.com/channels/{{ sensor.sensor_id }}" target="_blank">
+                <a id="a-thingspeak-channel" href="https://thingspeak.com/channels/{{ sensor.sensor_id }}"
+                   target="_blank">
                     Посмотреть данные с сенсора на thingspeak.com
                 </a>
                 <br/>
                 <br/>
                 <div class="input-group text-center">
-                    <input type="submit" class="btn btn-primary btn-block" value="Отправить"/>
+                    {% if user.is_superuser %}
+                        <div class="col-md-8">
+                            <input type="submit" class="btn btn-primary btn-block" value="Отправить"/>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="button" class="btn btn-danger btn-block" value="Удалить"
+                                   data-url="{% url 'sensor_delete' sensor.sensor_id %}" id="btn-delete-sensor"
+                                   onclick="showDeleteDialog()"/>
+                        </div>
+                    {% else %}
+                        <input type="submit" class="btn btn-primary btn-block" value="Отправить"/>
+                    {% endif %}
                 </div>
             </form>
         </div>
@@ -61,6 +73,27 @@
     <script>
         function getRandomInt(min, max) {
             return Math.floor(Math.random() * (max - min)) + min;
+        }
+
+        function showDeleteDialog() {
+            bootbox.confirm({
+                message: "Вы действительно хотите удалить сенсор?",
+                buttons: {
+                    confirm: {
+                        label: 'Да, удалить',
+                        className: 'btn-danger'
+                    },
+                    cancel: {
+                        label: 'Отмена',
+                        className: 'btn'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        window.location.href = $('#btn-delete-sensor').data('url');
+                    }
+                }
+            });
         }
 
         $(function () {
